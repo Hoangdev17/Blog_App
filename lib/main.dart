@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:untitled2/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:untitled2/core/theme/theme.dart';
 import 'package:untitled2/features/auth/presentation/bloc/auth_bloc.dart';
 import 'package:untitled2/features/auth/presentation/pages/login_page.dart';
+import 'package:untitled2/features/blog/presentation/pages/blog_page.dart';
 import 'package:untitled2/init_dependencies.dart';
 
 void main() async {
@@ -11,6 +13,9 @@ void main() async {
 
   runApp(MultiBlocProvider(
     providers: [
+      BlocProvider(
+        create: (_) => serviceLocator<AppUserCubit>(),
+      ),
       BlocProvider(create: (_) => serviceLocator<AuthBloc>(),
       ),
     ],
@@ -38,7 +43,17 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Blog App',
       theme: AppTheme.darkThemeMode,
-      home: const LoginPage(),
+      home: BlocSelector<AppUserCubit, AppUserState, bool>(
+        selector: (state) {
+          return state is AppUserLoggedIn;
+        },
+        builder: (context, isLoggedIn) {
+          if (isLoggedIn) {
+            return const BlogPage();
+          }
+          return const LoginPage();
+        },
+      ),
     );
   }
 }

@@ -1,9 +1,9 @@
 import 'package:fpdart/fpdart.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as sb;
+import 'package:untitled2/core/common/entities/user.dart';
 import 'package:untitled2/core/error/exception.dart';
 import 'package:untitled2/core/error/failures.dart';
 import 'package:untitled2/features/auth/data/datasources/auth_remote_data_source.dart';
-import 'package:untitled2/features/auth/domain/entities/user.dart';
 import 'package:untitled2/features/auth/domain/repository/auth_repository.dart';
 
 class AuthRepositoryImpl implements AuthRepository {

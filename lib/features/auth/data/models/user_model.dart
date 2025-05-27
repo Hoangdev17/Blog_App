@@ -1,5 +1,7 @@
 
-import 'package:untitled2/features/auth/domain/entities/user.dart';
+
+
+import 'package:untitled2/core/common/entities/user.dart';
 
 class UserModel extends User {
   UserModel({

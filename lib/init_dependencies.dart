@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:untitled2/core/common/cubits/app_user/app_user_cubit.dart';
 import 'package:untitled2/core/secret/app_secrets.dart';
 import 'package:untitled2/features/auth/data/datasources/auth_remote_data_source.dart';
 import 'package:untitled2/features/auth/data/repositories/auth_repository_impl.dart';
@@ -20,6 +21,7 @@ Future<void> initDependencies() async {
 
   print('Supabase initialized: ${supabase.client != null}');
   serviceLocator.registerLazySingleton(() => supabase.client);
+  serviceLocator.registerLazySingleton(() => AppUserCubit());
 }
 
 void _initAuth() {
@@ -54,6 +56,7 @@ void _initAuth() {
     userSignUp: serviceLocator(),
     userLogin: serviceLocator(),
     currentUser: serviceLocator(),
+    appUserCubit: serviceLocator(),
   ),
   );
 }
